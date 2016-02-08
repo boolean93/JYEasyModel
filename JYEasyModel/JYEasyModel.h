@@ -8,12 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+#if __has_include(<JYEastModel/JYEasyModel.h>)
 //! Project version number for JYEasyModel.
 FOUNDATION_EXPORT double JYEasyModelVersionNumber;
 
 //! Project version string for JYEasyModel.
 FOUNDATION_EXPORT const unsigned char JYEasyModelVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <JYEasyModel/PublicHeader.h>
+#import <JYEasyModel/NSObject+JYEasyModel.h>
 
-@import <JYEasyModel/NSObject+JYEasyModel.h>
+#else
+
+#import "NSObject+JYEasyModel.h"
+
+#endif

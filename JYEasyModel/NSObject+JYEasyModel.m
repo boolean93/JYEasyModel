@@ -10,4 +10,8 @@
 
 @implementation NSObject (JYEasyModel)
 
++ (instancetype)JY_modelWithDictionary:(NSDictionary *)dict{
+    return self.new;
+}
+
 @end

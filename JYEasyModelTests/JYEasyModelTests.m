@@ -7,6 +7,9 @@
 //
 
 #import <XCTest/XCTest.h>
+#import <JYEasyModel/JYEasyModel.h>
+
+#import "JYPersonModel.h"
 
 @interface JYEasyModelTests : XCTestCase
 
@@ -27,6 +30,8 @@
 - (void)testExample {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
+    id model = [JYPersonModel JY_modelWithJSON:@""];
+    NSLog(@"%@", model);
 }
 
 - (void)testPerformanceExample {

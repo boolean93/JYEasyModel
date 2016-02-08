@@ -10,4 +10,6 @@
 
 @interface NSObject (JYEasyModel)
 
++ (instancetype)JY_modelWithDictionary:(NSDictionary *)dict;
+
 @end

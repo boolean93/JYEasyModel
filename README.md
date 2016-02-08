@@ -1,2 +1,2 @@
 # JYEasyModel
-一个朴素的JSON->CustomModel
+A framework aims at converting JSON to user-customized model class.

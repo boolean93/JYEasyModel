@@ -10,8 +10,9 @@
 		93CCEF321C66F937006B0CC0 /* JYEasyModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 93CCEF311C66F937006B0CC0 /* JYEasyModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		93CCEF391C66F937006B0CC0 /* JYEasyModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93CCEF2E1C66F937006B0CC0 /* JYEasyModel.framework */; };
 		93CCEF3E1C66F937006B0CC0 /* JYEasyModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 93CCEF3D1C66F937006B0CC0 /* JYEasyModelTests.m */; };
-		93CCEF4A1C66FDD3006B0CC0 /* NSObject+JYEasyModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 93CCEF481C66FDD3006B0CC0 /* NSObject+JYEasyModel.h */; };
+		93CCEF4A1C66FDD3006B0CC0 /* NSObject+JYEasyModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 93CCEF481C66FDD3006B0CC0 /* NSObject+JYEasyModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		93CCEF4B1C66FDD3006B0CC0 /* NSObject+JYEasyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 93CCEF491C66FDD3006B0CC0 /* NSObject+JYEasyModel.m */; };
+		93CCEF4E1C68D4B0006B0CC0 /* JYPersonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 93CCEF4D1C68D4B0006B0CC0 /* JYPersonModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +34,8 @@
 		93CCEF3F1C66F937006B0CC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		93CCEF481C66FDD3006B0CC0 /* NSObject+JYEasyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+JYEasyModel.h"; sourceTree = "<group>"; };
 		93CCEF491C66FDD3006B0CC0 /* NSObject+JYEasyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+JYEasyModel.m"; sourceTree = "<group>"; };
+		93CCEF4C1C671005006B0CC0 /* JYPersonModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYPersonModel.h; sourceTree = "<group>"; };
+		93CCEF4D1C68D4B0006B0CC0 /* JYPersonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYPersonModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,9 +79,9 @@
 			isa = PBXGroup;
 			children = (
 				93CCEF311C66F937006B0CC0 /* JYEasyModel.h */,
-				93CCEF331C66F937006B0CC0 /* Info.plist */,
 				93CCEF481C66FDD3006B0CC0 /* NSObject+JYEasyModel.h */,
 				93CCEF491C66FDD3006B0CC0 /* NSObject+JYEasyModel.m */,
+				93CCEF331C66F937006B0CC0 /* Info.plist */,
 			);
 			path = JYEasyModel;
 			sourceTree = "<group>";
@@ -86,6 +89,8 @@
 		93CCEF3C1C66F937006B0CC0 /* JYEasyModelTests */ = {
 			isa = PBXGroup;
 			children = (
+				93CCEF4C1C671005006B0CC0 /* JYPersonModel.h */,
+				93CCEF4D1C68D4B0006B0CC0 /* JYPersonModel.m */,
 				93CCEF3D1C66F937006B0CC0 /* JYEasyModelTests.m */,
 				93CCEF3F1C66F937006B0CC0 /* Info.plist */,
 			);
@@ -211,6 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				93CCEF3E1C66F937006B0CC0 /* JYEasyModelTests.m in Sources */,
+				93CCEF4E1C68D4B0006B0CC0 /* JYPersonModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
