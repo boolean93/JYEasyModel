@@ -8,5 +8,5 @@
 #import <JYEasyModel/JYEasyModel.h>
 
 @interface JYPersonModel : NSObject
-
+@property (nonatomic, strong) NSNumber *age;
 @end

@@ -7,11 +7,19 @@
 //
 
 #import "NSObject+JYEasyModel.h"
+#import <objc/runtime.h>
 
 @implementation NSObject (JYEasyModel)
 
 + (instancetype)JY_modelWithDictionary:(NSDictionary *)dict{
-    return self.new;
+    id instance = self.new;
+    [dict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        SEL selector = NSSelectorFromString([NSString stringWithFormat:@"%@%@:", @"set", key]);
+        if ([instance respondsToSelector:selector]) {
+            objc_msgSend(instance, selector, obj);
+        }
+    }];
+    return instance;
 }
 
 @end

@@ -28,10 +28,8 @@
 }
 
 - (void)testExample {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
-    id model = [JYPersonModel JY_modelWithJSON:@""];
-    NSLog(@"%@", model);
+    JYPersonModel *model = [JYPersonModel JY_modelWithDictionary:@{@"Age" : @10}];
+    XCTAssert([model.age isEqual:@10]);
 }
 
 - (void)testPerformanceExample {
