@@ -12,10 +12,19 @@
 #import "JYPersonModel.h"
 
 @interface JYEasyModelTests : XCTestCase
-
+@property (nonatomic, strong) NSNumber *number;
 @end
 
 @implementation JYEasyModelTests
+
+- (NSString *)json {
+    return @"{\"Age\":10, \"Name\":\"Hello\"}";
+}
+
+- (void)testObject {
+    Class cls = JYPersonModel.class;
+    NSLog(@"-------------------%s", object_getClassName(cls));
+}
 
 - (void)setUp {
     [super setUp];
@@ -27,16 +36,15 @@
     [super tearDown];
 }
 
-- (void)testExample {
-    JYPersonModel *model = [JYPersonModel JY_modelWithDictionary:@{@"Age" : @10}];
-    XCTAssert([model.age isEqual:@10]);
+- (void)testNormalSample {
+    JYPersonModel *model = [JYPersonModel JY_modelFromDictionary:@{@"age" : @10}];
+    XCTAssert([model.hello_age isEqual:@10]);
 }
 
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+- (void)testJsonSample {
+    NSString *json = @"{\"age\":10}";
+    JYPersonModel *model = [JYPersonModel JY_modelFromJSON:json];
+    XCTAssert([model.hello_age isEqual:@10]);
 }
 
 @end

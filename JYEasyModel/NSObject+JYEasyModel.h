@@ -10,6 +10,12 @@
 
 @interface NSObject (JYEasyModel)
 
-+ (instancetype)JY_modelWithDictionary:(NSDictionary *)dict;
++ (instancetype)JY_modelFromDictionary:(NSDictionary *)dict;
+
++ (instancetype)JY_modelFromJSON:(NSString *)jsonString;
+
++ (NSDictionary *)JY_dictionaryFromJSON:(NSString *)jsonString;
+
++ (NSString *)JY_mappedNameForKey:(NSString *)key forInstance:(id)instance;
 
 @end
