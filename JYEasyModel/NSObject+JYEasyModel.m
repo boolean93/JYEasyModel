@@ -11,10 +11,12 @@
 
 @implementation NSObject (JYEasyModel)
 
-+ (void)JY_setValue:(id)value usingSetter:(SEL)selector forInstance:(id)instance {
++ (BOOL)JY_setValue:(id)value usingSetter:(SEL)selector forInstance:(id)instance {
     if ([instance respondsToSelector:selector]) {
         objc_msgSend(instance, selector, value);
+        return YES;
     }
+    return NO;
 }
 
 + (NSString *)JY_mappedNameForKey:(NSString *)key forInstance:(id)instance {
@@ -23,17 +25,22 @@
         NSDictionary *map = (__bridge NSDictionary *)(__bridge void *)objc_msgSend(instance, mapSelector);
         return map[key];
     }
-    return @"Nothing";
+    return key;
+}
+
++ (NSString *)JY_setterNameForKey:(NSString *)key {
+    return ({
+        NSString *result = [NSString stringWithFormat:@"%c", [key characterAtIndex:0]];
+        result = [NSString stringWithFormat:@"set%@%@:", result.uppercaseString, [key substringFromIndex:1]];
+        result;
+    });
 }
 
 + (instancetype)JY_modelFromDictionary:(NSDictionary *)dict useMapping:(BOOL)useMapping {
     id instance = self.new;
     [dict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-        NSString *mappedKey = [self JY_mappedNameForKey:key forInstance:instance].mutableCopy;
-        mappedKey = [NSString stringWithFormat:@"%@%@",
-                     [NSString stringWithFormat:@"%c", [mappedKey characterAtIndex:0]]
-                     .uppercaseString, [mappedKey substringFromIndex:1]];
-        NSString *setterName = [NSString stringWithFormat:@"set%@:", mappedKey];
+        NSString *mappedKey = [self JY_mappedNameForKey:key forInstance:instance];
+        NSString *setterName = [self JY_setterNameForKey:mappedKey];
         SEL selector = NSSelectorFromString(setterName);
         [self JY_setValue:obj usingSetter:selector forInstance:instance];
     }];
