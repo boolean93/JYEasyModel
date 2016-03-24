@@ -17,10 +17,6 @@
 
 @implementation JYEasyModelTests
 
-- (NSString *)json {
-    return @"{\"Age\":10, \"Name\":\"Hello\"}";
-}
-
 - (void)testObject {
     Class cls = JYPersonModel.class;
     NSLog(@"-------------------%s", object_getClassName(cls));
@@ -42,9 +38,13 @@
 }
 
 - (void)testJsonSample {
-    NSString *json = @"{\"age\":10}";
-    JYPersonModel *model = [JYPersonModel JY_modelFromJSON:json];
+    NSDictionary *dict = @{
+                           @"age" : @10,
+                           @"name" : @"Boolean93"
+                           };
+    JYPersonModel *model = [JYPersonModel JY_modelFromDictionary:dict];
     XCTAssert([model.hello_age isEqual:@10]);
+    XCTAssert(![model.hello_name isEqual:@"Boolean93"]);
 }
 
 @end

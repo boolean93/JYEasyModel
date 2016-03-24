@@ -10,15 +10,15 @@
 
 @implementation JYPersonModel : NSObject
 
-- (NSArray *)JYWhiteList {
++ (NSArray *)JYWhiteList {
+    return @[@"age"];
+}
+
++ (NSArray *)JYBlackList {
     return @[];
 }
 
-- (NSArray *)JYBlackList {
-    return @[];
-}
-
-- (NSDictionary *)JYModelMap {
++ (NSDictionary *)JYModelMap {
     return @{
              @"age" : @"hello_age",
              @"name" : @"hello_name"
