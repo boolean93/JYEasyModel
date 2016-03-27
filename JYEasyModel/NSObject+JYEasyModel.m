@@ -8,13 +8,15 @@
 
 #import "NSObject+JYEasyModel.h"
 #import <objc/runtime.h>
+#import <objc/message.h>
 
 @implementation NSObject (JYEasyModel)
 
 #pragma mark - Tool functions
 + (BOOL)_JY_setValue:(id)value usingSetter:(SEL)selector forInstance:(id)instance {
     if ([instance respondsToSelector:selector]) {
-        objc_msgSend(instance, selector, value);
+        id (*set_msgSend)(id, SEL, id) = (void *)objc_msgSend;
+        set_msgSend(instance, selector, value);
         return YES;
     }
     return NO;
@@ -37,7 +39,8 @@
     }
     SEL mapSelector = @selector(JYModelMap);
     if ([self respondsToSelector: mapSelector] && key.length > 0) {
-        NSDictionary *map = (__bridge NSDictionary *)(__bridge void *)objc_msgSend(self, mapSelector);
+        id (*get_msgSend)(id, SEL) = (void *)objc_msgSend;
+        NSDictionary *map = get_msgSend(self, mapSelector);
         return map[key];
     }
     return key; // 这里感觉不太对
@@ -46,7 +49,8 @@
 + (NSArray *)_JY_getWhiteList {
     SEL whiteListSEL = @selector(JYWhiteList);
     if ([self respondsToSelector:whiteListSEL]) {
-        return (__bridge NSArray *)(__bridge void *)objc_msgSend(self, whiteListSEL);
+        id (*get_msgSend)(id, SEL) = (void *)objc_msgSend;
+        return (NSArray *)get_msgSend(self, whiteListSEL);
     }
     return @[];
 }
@@ -54,7 +58,8 @@
 + (NSArray *)_JY_getBlackList {
     SEL blackListSEL = @selector(JYBlackList);
     if ([self respondsToSelector:blackListSEL]) {
-        return (__bridge NSArray *)(__bridge void *)objc_msgSend(self, blackListSEL);
+        id (*get_msgSend)(id, SEL) = (void *)objc_msgSend;
+        return (NSArray *)get_msgSend(self, blackListSEL);
     }
     return @[];
 }
