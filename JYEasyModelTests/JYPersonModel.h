@@ -10,4 +10,8 @@
 @interface JYPersonModel : NSObject
 @property (nonatomic, strong) NSNumber *hello_age;
 @property (nonatomic, strong) NSString *hello_name;
+
++ (NSArray *)JYWhiteList;
+
++ (NSDictionary *)JYModelMap;
 @end

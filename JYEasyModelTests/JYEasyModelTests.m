@@ -42,9 +42,18 @@
                            @"age" : @10,
                            @"name" : @"Boolean93"
                            };
-    JYPersonModel *model = [JYPersonModel JY_modelFromDictionary:dict];
-    XCTAssert([model.hello_age isEqual:@10]);
-    XCTAssert(model.hello_name == nil);
+    [self measureBlock:^{
+        for (NSInteger i = 0; i < 100000; i++) {
+            JYPersonModel *model = [JYPersonModel JY_modelFromDictionary:dict];
+        }
+    }];
 }
 
+- (void)testPointer {
+    [JYPersonModel JYWhiteList];
+    [JYPersonModel JYWhiteList];
+    [JYPersonModel JYWhiteList];
+    [JYPersonModel JYWhiteList];
+    [JYPersonModel JYWhiteList];
+}
 @end

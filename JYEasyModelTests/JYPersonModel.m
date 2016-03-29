@@ -11,7 +11,9 @@
 @implementation JYPersonModel : NSObject
 
 + (NSArray *)JYWhiteList {
-    return @[@"age"];
+    NSArray *result = @[@"age"];
+//    NSLog(@"-------------> WHITELIST: %p <-------------", result);
+    return result;
 }
 
 + (NSArray *)JYBlackList {
@@ -19,10 +21,12 @@
 }
 
 + (NSDictionary *)JYModelMap {
-    return @{
-             @"age" : @"hello_age",
-             @"name" : @"hello_name"
-             };
+    NSDictionary *result = @{
+                             @"age" : @"hello_age",
+                             @"name" : @"hello_name"
+                             };
+//    NSLog(@"-------------> MODELMAP: %p <-------------", result);
+    return result;
 }
 
 @end
