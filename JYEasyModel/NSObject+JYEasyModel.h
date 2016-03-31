@@ -8,6 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol JYModel <NSObject>
+
+@optional
+
++ (NSArray *)JYWhiteList;
+
++ (NSArray *)JYBlackList;
+
++ (NSDictionary *)JYModelMap;
+
+@end
+
 @interface NSObject (JYEasyModel)
 
 /**
