@@ -28,13 +28,20 @@
 }
 
 - (void)testExample {
-    JYPersonModel *model = [JYPersonModel JY_modelWithDictionary:@{@"Age" : @10}];
-    XCTAssert([model.age isEqual:@10]);
+    for (int i = 0; i < 100000; i++) {
+        [JYPersonModel JY_modelWithDictionary:@{@"age" : @10}];
+    }
+//    XCTAssert([model.age isEqual:@10]);
 }
 
 - (void)testPerformanceExample {
     // This is an example of a performance test case.
+    NSDictionary *dict = @{@"age" : @10};
     [self measureBlock:^{
+
+        for (int i = 0; i < 100000; i++) {
+            [JYPersonModel JY_modelWithDictionary:dict];
+        }
         // Put the code you want to measure the time of here.
     }];
 }

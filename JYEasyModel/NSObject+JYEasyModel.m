@@ -7,18 +7,25 @@
 //
 
 #import "NSObject+JYEasyModel.h"
+#import "JYClassInfo.h"
+#import "JYPropertyMeta.h"
 #import <objc/runtime.h>
+#import <objc/message.h>
+
+#define JY_OBJC_MSGSEND(x,y,z) ((void (*)(id, SEL, id))(void *) objc_msgSend)(x,y,z);
 
 @implementation NSObject (JYEasyModel)
 
 + (instancetype)JY_modelWithDictionary:(NSDictionary *)dict{
     id instance = self.new;
-    [dict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-        SEL selector = NSSelectorFromString([NSString stringWithFormat:@"%@%@:", @"set", key]);
-        if ([instance respondsToSelector:selector]) {
-            objc_msgSend(instance, selector, obj);
+    JYClassInfo *classInfo = [JYClassInfo initWithClass:self.class];
+    NSArray *properties = classInfo.properties;
+    for (JYPropertyMeta *property in properties) {
+        id result;
+        if ((result = [dict valueForKey:property.propertyName])) {
+            JY_OBJC_MSGSEND(instance, property.setterSeletor, result);
         }
-    }];
+    }
     return instance;
 }
 
