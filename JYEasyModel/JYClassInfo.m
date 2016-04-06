@@ -29,6 +29,8 @@
             temp.properties = propertyList.copy;
             temp;
         });
+
+        [JYGlobalInfo sharedClasses][cls] = result;
     }
 
     return result;
