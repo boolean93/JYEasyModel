@@ -18,5 +18,5 @@
 @end
 
 @interface JYGlobalInfo : NSObject
-+ (NSMutableDictionary *)sharedClasses;
++ (NSMutableDictionary<Class, JYClassInfo *> *)sharedClasses;
 @end

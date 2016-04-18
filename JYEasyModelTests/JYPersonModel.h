@@ -9,4 +9,6 @@
 
 @interface JYPersonModel : NSObject
 @property (nonatomic, strong) NSNumber *age;
+@property int *array;
+@property NSString *str;
 @end

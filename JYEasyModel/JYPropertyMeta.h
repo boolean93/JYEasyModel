@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <objc/runtime.h>
+#import "JYTypeEncoding.h"
 
 @interface JYPropertyMeta : NSObject
 
@@ -15,6 +16,9 @@
 @property (nonatomic, strong) NSString *propertyName;
 @property (nonatomic, strong) NSString *setterName;
 @property (nonatomic) SEL setterSeletor;
+@property (nonatomic) JYTypeEncoding type;
 
 + (instancetype)metaWithProperty:(objc_property_t)property;
+
++ (JYTypeEncoding)getPropertyType:(objc_property_t)property;
 @end

@@ -11,6 +11,9 @@
 		934C53B81CAD64ED00EC17C4 /* JYPropertyMeta.m in Sources */ = {isa = PBXBuildFile; fileRef = 934C53B61CAD64ED00EC17C4 /* JYPropertyMeta.m */; };
 		934C53BB1CAD6FF300EC17C4 /* JYClassInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 934C53B91CAD6FF300EC17C4 /* JYClassInfo.h */; };
 		934C53BC1CAD6FF300EC17C4 /* JYClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 934C53BA1CAD6FF300EC17C4 /* JYClassInfo.m */; };
+		934C53BF1CC3767600EC17C4 /* JYTypeEncoding.h in Headers */ = {isa = PBXBuildFile; fileRef = 934C53BD1CC3767600EC17C4 /* JYTypeEncoding.h */; };
+		934C53C31CC386E800EC17C4 /* NSDictionary+JYEasyModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 934C53C11CC386E800EC17C4 /* NSDictionary+JYEasyModel.h */; };
+		934C53C41CC386E800EC17C4 /* NSDictionary+JYEasyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 934C53C21CC386E800EC17C4 /* NSDictionary+JYEasyModel.m */; };
 		93CCEF321C66F937006B0CC0 /* JYEasyModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 93CCEF311C66F937006B0CC0 /* JYEasyModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		93CCEF391C66F937006B0CC0 /* JYEasyModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93CCEF2E1C66F937006B0CC0 /* JYEasyModel.framework */; };
 		93CCEF3E1C66F937006B0CC0 /* JYEasyModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 93CCEF3D1C66F937006B0CC0 /* JYEasyModelTests.m */; };
@@ -34,6 +37,9 @@
 		934C53B61CAD64ED00EC17C4 /* JYPropertyMeta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYPropertyMeta.m; sourceTree = "<group>"; };
 		934C53B91CAD6FF300EC17C4 /* JYClassInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYClassInfo.h; sourceTree = "<group>"; };
 		934C53BA1CAD6FF300EC17C4 /* JYClassInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYClassInfo.m; sourceTree = "<group>"; };
+		934C53BD1CC3767600EC17C4 /* JYTypeEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYTypeEncoding.h; sourceTree = "<group>"; };
+		934C53C11CC386E800EC17C4 /* NSDictionary+JYEasyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+JYEasyModel.h"; sourceTree = "<group>"; };
+		934C53C21CC386E800EC17C4 /* NSDictionary+JYEasyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+JYEasyModel.m"; sourceTree = "<group>"; };
 		93CCEF2E1C66F937006B0CC0 /* JYEasyModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JYEasyModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		93CCEF311C66F937006B0CC0 /* JYEasyModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYEasyModel.h; sourceTree = "<group>"; };
 		93CCEF331C66F937006B0CC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -94,6 +100,9 @@
 				93CCEF481C66FDD3006B0CC0 /* NSObject+JYEasyModel.h */,
 				93CCEF491C66FDD3006B0CC0 /* NSObject+JYEasyModel.m */,
 				93CCEF331C66F937006B0CC0 /* Info.plist */,
+				934C53BD1CC3767600EC17C4 /* JYTypeEncoding.h */,
+				934C53C11CC386E800EC17C4 /* NSDictionary+JYEasyModel.h */,
+				934C53C21CC386E800EC17C4 /* NSDictionary+JYEasyModel.m */,
 			);
 			path = JYEasyModel;
 			sourceTree = "<group>";
@@ -116,7 +125,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				934C53BF1CC3767600EC17C4 /* JYTypeEncoding.h in Headers */,
 				934C53BB1CAD6FF300EC17C4 /* JYClassInfo.h in Headers */,
+				934C53C31CC386E800EC17C4 /* NSDictionary+JYEasyModel.h in Headers */,
 				93CCEF4A1C66FDD3006B0CC0 /* NSObject+JYEasyModel.h in Headers */,
 				934C53B71CAD64ED00EC17C4 /* JYPropertyMeta.h in Headers */,
 				93CCEF321C66F937006B0CC0 /* JYEasyModel.h in Headers */,
@@ -222,6 +233,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				934C53BC1CAD6FF300EC17C4 /* JYClassInfo.m in Sources */,
+				934C53C41CC386E800EC17C4 /* NSDictionary+JYEasyModel.m in Sources */,
 				934C53B81CAD64ED00EC17C4 /* JYPropertyMeta.m in Sources */,
 				93CCEF4B1C66FDD3006B0CC0 /* NSObject+JYEasyModel.m in Sources */,
 			);

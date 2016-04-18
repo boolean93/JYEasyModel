@@ -21,7 +21,8 @@
         objc_property_t *properties = class_copyPropertyList(cls, &count);
         NSMutableArray *propertyList = @[].mutableCopy;
         for (int i = 0; i < count; i++) {
-            [propertyList addObject:[JYPropertyMeta metaWithProperty:properties[i]]];
+            JYPropertyMeta *oneProperty = [JYPropertyMeta metaWithProperty:properties[i]];
+            [propertyList addObject:oneProperty];
         }
 
         result = ({
@@ -31,6 +32,7 @@
         });
 
         [JYGlobalInfo sharedClasses][cls] = result;
+        free(properties);
     }
 
     return result;
@@ -40,7 +42,7 @@
 
 @implementation JYGlobalInfo
 
-+ (NSMutableDictionary *)sharedClasses {
++ (NSMutableDictionary<Class, JYClassInfo *> *)sharedClasses {
     static NSMutableDictionary<Class, JYClassInfo *> *classes;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
