@@ -21,4 +21,7 @@
 + (instancetype)metaWithProperty:(objc_property_t)property;
 
 + (JYTypeEncoding)getPropertyType:(objc_property_t)property;
+
++ (JYTypeEncoding)getTypeEncodingForClass:(Class)cls;
+
 @end

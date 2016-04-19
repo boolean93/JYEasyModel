@@ -35,48 +35,59 @@ NS_INLINE NSString *getSetterName(const char *name) {
             strcpy(className, typeString + 2);
             className[len - 3] = '\0';
             Class cls = objc_getClass(className);
-            if ([cls isSubclassOfClass:NSMutableArray.class]) return JYTypeEncodingNSMutableArray;
-            if ([cls isSubclassOfClass:NSMutableString.class]) return JYTypeEncodingNSMutableString;
-            if ([cls isSubclassOfClass:NSMutableDictionary.class]) return JYTypeEncodingNSMutableDict;
-            if ([cls isSubclassOfClass:NSMutableSet.class]) return JYTypeEncodingNSMutableSet;
-            if ([cls isSubclassOfClass:NSMutableData.class]) return JYTypeEncodingNSMutableData;
-
-            if ([cls isSubclassOfClass:NSArray.class]) return JYTypeEncodingNSArray;
-            if ([cls isSubclassOfClass:NSString.class]) return JYTypeEncodingNSString;
-            if ([cls isSubclassOfClass:NSDictionary.class]) return JYTypeEncodingNSDict;
-            if ([cls isSubclassOfClass:NSSet.class]) return JYTypeEncodingNSSet;
-            if ([cls isSubclassOfClass:NSData.class]) return JYTypeEncodingNSData;
-
-            if ([cls isSubclassOfClass:NSDate.class]) return JYTypeEncodingNSDate;
-            if ([cls isSubclassOfClass:NSDecimalNumber.class]) return JYTypeEncodingNSDecimalNumber;
-            if ([cls isSubclassOfClass:NSNumber.class]) return JYTypeEncodingNSNumber;
-            if ([cls isSubclassOfClass:NSURL.class]) return JYTypeEncodingNSURL;
-            if ([cls isSubclassOfClass:NSValue.class]) return JYTypeEncodingNSValue;
-
-            return JYTypeEncodingNSUnknown;
+            return [self getTypeEncodingForClass:cls];
         } else {
-            switch (typeString[0]) {
-                case 'c':   return JYTypeEncodingChar;
-                case 'i':   return JYTypeEncodingInt;
-                case 's':   return JYTypeEncodingShort;
-                case 'l':   return JYTypeEncodingLong;
-                case 'q':   return JYTypeEncodingLongLong;
-                case 'C':   return JYTypeEncodingUChar;
-                case 'I':   return JYTypeEncodingUInt;
-                case 'S':   return JYTypeEncodingUShort;
-                case 'L':   return JYTypeEncodingULong;
-                case 'Q':   return JYTypeEncodingULongLong;
-                case 'f':   return JYTypeEncodingFloat;
-                case 'd':   return JYTypeEncodingDouble;
-                case 'B':   return JYTypeEncodingBool;
-                case 'v':   return JYTypeEncodingVoid;
-                case '*':   return JYTypeEncodingCString;
-                case ':':   return JYTypeEncodingSEL;
-                default:
-                    break;
-            }
+            return [self getTypeEncodingForAttr:typeString[0]];
         }
     }
     return JYTypeEncodingUnknown;
+}
+
++ (JYTypeEncoding)getTypeEncodingForClass:(Class)cls {
+    if (cls == nil) {   // 剪枝
+        return JYTypeEncodingNSUnknown;
+    }
+
+    if ([cls isSubclassOfClass:NSMutableArray.class]) return JYTypeEncodingNSMutableArray;
+    if ([cls isSubclassOfClass:NSMutableString.class]) return JYTypeEncodingNSMutableString;
+    if ([cls isSubclassOfClass:NSMutableDictionary.class]) return JYTypeEncodingNSMutableDict;
+    if ([cls isSubclassOfClass:NSMutableSet.class]) return JYTypeEncodingNSMutableSet;
+    if ([cls isSubclassOfClass:NSMutableData.class]) return JYTypeEncodingNSMutableData;
+
+    if ([cls isSubclassOfClass:NSArray.class]) return JYTypeEncodingNSArray;
+    if ([cls isSubclassOfClass:NSString.class]) return JYTypeEncodingNSString;
+    if ([cls isSubclassOfClass:NSDictionary.class]) return JYTypeEncodingNSDict;
+    if ([cls isSubclassOfClass:NSSet.class]) return JYTypeEncodingNSSet;
+    if ([cls isSubclassOfClass:NSData.class]) return JYTypeEncodingNSData;
+
+    if ([cls isSubclassOfClass:NSDate.class]) return JYTypeEncodingNSDate;
+    if ([cls isSubclassOfClass:NSDecimalNumber.class]) return JYTypeEncodingNSDecimalNumber;
+    if ([cls isSubclassOfClass:NSNumber.class]) return JYTypeEncodingNSNumber;
+    if ([cls isSubclassOfClass:NSURL.class]) return JYTypeEncodingNSURL;
+    if ([cls isSubclassOfClass:NSValue.class]) return JYTypeEncodingNSValue;
+
+    return JYTypeEncodingNSUnknown;
+}
+
++ (JYTypeEncoding)getTypeEncodingForAttr:(char)attr {
+    switch (attr) {
+        case 'c':   return JYTypeEncodingChar;
+        case 'i':   return JYTypeEncodingInt;
+        case 's':   return JYTypeEncodingShort;
+        case 'l':   return JYTypeEncodingLong;
+        case 'q':   return JYTypeEncodingLongLong;
+        case 'C':   return JYTypeEncodingUChar;
+        case 'I':   return JYTypeEncodingUInt;
+        case 'S':   return JYTypeEncodingUShort;
+        case 'L':   return JYTypeEncodingULong;
+        case 'Q':   return JYTypeEncodingULongLong;
+        case 'f':   return JYTypeEncodingFloat;
+        case 'd':   return JYTypeEncodingDouble;
+        case 'B':   return JYTypeEncodingBool;
+        case 'v':   return JYTypeEncodingVoid;
+        case '*':   return JYTypeEncodingCString;
+        case ':':   return JYTypeEncodingSEL;
+        default:    return JYTypeEncodingUnknown;
+    }
 }
 @end
