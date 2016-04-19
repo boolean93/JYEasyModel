@@ -30,8 +30,11 @@ NS_INLINE NSString *getSetterName(const char *name) {
     char *typeString = property_copyAttributeValue(property, "T");
     unsigned long len = strlen(typeString);
     if (len > 0) {
-        if (typeString[0] == '@') {   // is object
-            Class cls = objc_getClass(property_getName(property));
+        if (typeString[0] == '@') {
+            char className[len - 2];
+            strcpy(className, typeString + 2);
+            className[len - 3] = '\0';
+            Class cls = objc_getClass(className);
             if ([cls isSubclassOfClass:NSMutableArray.class]) return JYTypeEncodingNSMutableArray;
             if ([cls isSubclassOfClass:NSMutableString.class]) return JYTypeEncodingNSMutableString;
             if ([cls isSubclassOfClass:NSMutableDictionary.class]) return JYTypeEncodingNSMutableDict;
