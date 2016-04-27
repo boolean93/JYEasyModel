@@ -14,6 +14,7 @@
 		934C53BF1CC3767600EC17C4 /* JYTypeEncoding.h in Headers */ = {isa = PBXBuildFile; fileRef = 934C53BD1CC3767600EC17C4 /* JYTypeEncoding.h */; };
 		934C53C31CC386E800EC17C4 /* NSDictionary+JYEasyModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 934C53C11CC386E800EC17C4 /* NSDictionary+JYEasyModel.h */; };
 		934C53C41CC386E800EC17C4 /* NSDictionary+JYEasyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 934C53C21CC386E800EC17C4 /* NSDictionary+JYEasyModel.m */; };
+		93C52BF61CCFDEF700DA86EA /* JYDickModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C52BF51CCFDEF700DA86EA /* JYDickModel.m */; };
 		93CCEF321C66F937006B0CC0 /* JYEasyModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 93CCEF311C66F937006B0CC0 /* JYEasyModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		93CCEF391C66F937006B0CC0 /* JYEasyModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93CCEF2E1C66F937006B0CC0 /* JYEasyModel.framework */; };
 		93CCEF3E1C66F937006B0CC0 /* JYEasyModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 93CCEF3D1C66F937006B0CC0 /* JYEasyModelTests.m */; };
@@ -40,6 +41,8 @@
 		934C53BD1CC3767600EC17C4 /* JYTypeEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYTypeEncoding.h; sourceTree = "<group>"; };
 		934C53C11CC386E800EC17C4 /* NSDictionary+JYEasyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+JYEasyModel.h"; sourceTree = "<group>"; };
 		934C53C21CC386E800EC17C4 /* NSDictionary+JYEasyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+JYEasyModel.m"; sourceTree = "<group>"; };
+		93C52BF41CCFDEF700DA86EA /* JYDickModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYDickModel.h; sourceTree = "<group>"; };
+		93C52BF51CCFDEF700DA86EA /* JYDickModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYDickModel.m; sourceTree = "<group>"; };
 		93CCEF2E1C66F937006B0CC0 /* JYEasyModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JYEasyModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		93CCEF311C66F937006B0CC0 /* JYEasyModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYEasyModel.h; sourceTree = "<group>"; };
 		93CCEF331C66F937006B0CC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -110,6 +113,8 @@
 		93CCEF3C1C66F937006B0CC0 /* JYEasyModelTests */ = {
 			isa = PBXGroup;
 			children = (
+				93C52BF41CCFDEF700DA86EA /* JYDickModel.h */,
+				93C52BF51CCFDEF700DA86EA /* JYDickModel.m */,
 				93CCEF4C1C671005006B0CC0 /* JYPersonModel.h */,
 				93CCEF4D1C68D4B0006B0CC0 /* JYPersonModel.m */,
 				93CCEF3D1C66F937006B0CC0 /* JYEasyModelTests.m */,
@@ -244,6 +249,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				93CCEF3E1C66F937006B0CC0 /* JYEasyModelTests.m in Sources */,
+				93C52BF61CCFDEF700DA86EA /* JYDickModel.m in Sources */,
 				93CCEF4E1C68D4B0006B0CC0 /* JYPersonModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

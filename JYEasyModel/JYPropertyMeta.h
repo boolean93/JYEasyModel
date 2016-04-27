@@ -17,6 +17,7 @@
 @property (nonatomic, strong) NSString *setterName;
 @property (nonatomic) SEL setterSeletor;
 @property (nonatomic) JYTypeEncoding type;
+@property (nonatomic) NSString *typeName;
 
 + (instancetype)metaWithProperty:(objc_property_t)property;
 
@@ -24,4 +25,7 @@
 
 + (JYTypeEncoding)getTypeEncodingForClass:(Class)cls;
 
++ (BOOL)canMatchFrom:(JYTypeEncoding)fromType to:(JYTypeEncoding)toType;
+
+- (BOOL)isKindOfJYModel;
 @end

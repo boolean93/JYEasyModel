@@ -11,6 +11,7 @@
 
 @interface JYClassInfo : NSObject
 
+@property (nonatomic, strong) NSString *className;
 @property (nonatomic, strong) NSArray<JYPropertyMeta *> *properties;
 
 + (JYClassInfo *)initWithClass:(Class)cls;

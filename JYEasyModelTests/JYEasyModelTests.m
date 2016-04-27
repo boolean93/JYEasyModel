@@ -10,6 +10,7 @@
 #import <JYEasyModel/JYEasyModel.h>
 
 #import "JYPersonModel.h"
+#import "JYDickModel.h"
 
 @interface JYEasyModelTests : XCTestCase
 @property (nonatomic, strong) NSDictionary *dict;
@@ -21,10 +22,10 @@
 - (void)setUp {
     [super setUp];
     self.dict = @{@"age" : @10, @"array" : @[@"fuck", @2, @3], @"str" : @"hehe"};
-    self.array = @[].mutableCopy;
-    for (int i = 0; i < 10000000; i++) {
-        [self.array addObject:[NSNumber numberWithInt:i]];
-    }
+//    self.array = @[].mutableCopy;
+//    for (int i = 0; i < 10000000; i++) {
+//        [self.array addObject:[NSNumber numberWithInt:i]];
+//    }
     // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 
@@ -36,6 +37,13 @@
 - (void)testExample {
     JYPersonModel *model = [JYPersonModel JY_modelWithDictionary:self.dict];
     NSLog(@"%@", model);
+}
+
+- (void)testQiantao {
+    JYPersonModel *person = [JYPersonModel JY_modelWithDictionary:self.dict];
+    JYDickModel *dick = [JYDickModel JY_modelWithDictionary:@{@"person" : self.dict}];
+    NSLog(@"%@", dick.person);
+    NSLog(@"%@", person);
 }
 
 - (void)testPerformanceExample {

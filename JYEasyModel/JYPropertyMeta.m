@@ -22,11 +22,11 @@ NS_INLINE NSString *getSetterName(const char *name) {
     instance->_propertyName = [NSString stringWithUTF8String:propertyName];
     instance->_setterName = getSetterName(propertyName);
     instance->_setterSeletor = NSSelectorFromString(instance->_setterName);
-    instance->_type = [self getPropertyType:property];
+    instance->_type = [self getPropertyType:property instance:instance];
     return instance;
 }
 
-+ (JYTypeEncoding)getPropertyType:(objc_property_t)property {
++ (JYTypeEncoding)getPropertyType:(objc_property_t)property instance:(JYPropertyMeta *)instance {
     char *typeString = property_copyAttributeValue(property, "T");
     unsigned long len = strlen(typeString);
     if (len > 0) {
@@ -35,6 +35,7 @@ NS_INLINE NSString *getSetterName(const char *name) {
             strcpy(className, typeString + 2);
             className[len - 3] = '\0';
             Class cls = objc_getClass(className);
+            instance->_typeName = [NSString stringWithUTF8String:className];
             return [self getTypeEncodingForClass:cls];
         } else {
             return [self getTypeEncodingForAttr:typeString[0]];
@@ -89,5 +90,29 @@ NS_INLINE NSString *getSetterName(const char *name) {
         case ':':   return JYTypeEncodingSEL;
         default:    return JYTypeEncodingUnknown;
     }
+}
+
+// TODO: 不同类型的对象之间的判断
++ (BOOL)canMatchFrom:(JYTypeEncoding)fromType to:(JYTypeEncoding)toType {
+    if (fromType == toType) {
+        return YES;
+    }
+    if (fromType >= 1 << 16 && fromType <= 1 << 29) {
+        if (fromType << 1 == toType || fromType >> 1 == toType) {
+            return YES;
+        }
+    }
+    if (toType == JYTypeEncodingNSUnknown) {
+        return YES;
+    }
+    return NO;
+}
+
+- (BOOL)isKindOfJYModel {
+    Class cls = NSClassFromString(self.typeName);
+    if ( [cls instancesRespondToSelector:@selector(iamjymodel)]) {
+        return YES;
+    }
+    return NO;
 }
 @end

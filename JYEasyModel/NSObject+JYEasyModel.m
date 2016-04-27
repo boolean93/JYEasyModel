@@ -24,10 +24,17 @@
     for (JYPropertyMeta *property in properties) {
         id valueToSet = [sourceDict matchedValueForProperty:property];
         if (valueToSet != nil) {
+            // 递归一下喽~
+            if (property.type == JYTypeEncodingNSUnknown && [property isKindOfJYModel]) {
+                valueToSet = [NSClassFromString(property.typeName) JY_modelWithDictionary:valueToSet];
+            }
             JY_OBJC_MSGSEND(instance, property.setterSeletor, valueToSet);
         }
     }
     return instance;
 }
 
+- (void)iamjymodel{
+    
+}
 @end
