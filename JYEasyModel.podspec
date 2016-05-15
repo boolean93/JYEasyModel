@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
 	I am a test for JYEasyModel
                    DESC
 
-  s.homepage     = "http://ios.dog/JYEasyModel"
+  s.homepage     = "http://ios.dog/bi-ye-she-ji"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -64,7 +64,7 @@ Pod::Spec.new do |s|
   #  the deployment target. You can optionally include the target after the platform.
   #
 
-  # s.platform     = :ios
+  s.platform     = :ios
   # s.platform     = :ios, "5.0"
 
   #  When using multiple platforms
@@ -80,7 +80,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "http://github.com/Boolean93/JYEasyModel.git", :tag => "0.0.1" }
+  s.source       = { :git => "https://github.com/Boolean93/JYEasyModel.git", :tag => "0.0.1" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -91,8 +91,8 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "Classes", "Classes/**/*.{h,m}"
-  s.exclude_files = "Classes/Exclude"
+  s.source_files  = "JYEasyModel", "JYEasyModel/*.{h,m}"
+  s.exclude_files = ""
 
   # s.public_header_files = "Classes/**/*.h"
 

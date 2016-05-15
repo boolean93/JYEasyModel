@@ -31,7 +31,7 @@
             temp;
         });
         result.className = [NSString stringWithUTF8String:class_getName(cls)];
-        [JYGlobalInfo sharedClasses][cls] = result;
+        [JYGlobalInfo sharedClasses][(id)cls] = result;
         free(properties);
     }
 
