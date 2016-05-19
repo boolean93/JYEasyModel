@@ -24,8 +24,8 @@
     for (JYPropertyMeta *property in properties) {
         id valueToSet = [sourceDict matchedValueForProperty:property];
         if (valueToSet != nil) {
-            // 递归一下喽~
-            if (property.type == JYTypeEncodingNSUnknown && [property isKindOfJYModel]) {
+            if (property.type == JYTypeEncodingJYModel) {
+                // 递归, 对自定义成员变量的类型进行处理
                 valueToSet = [NSClassFromString(property.typeName) JY_modelWithDictionary:valueToSet];
             }
             JY_OBJC_MSGSEND(instance, property.setterSeletor, valueToSet);

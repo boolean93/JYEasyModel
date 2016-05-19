@@ -44,5 +44,7 @@ typedef NS_OPTIONS(NSUInteger, JYTypeEncoding) {
     JYTypeEncodingNSMutableSet      = 1 << 29,
 
     JYTypeEncodingNSValue           = 1 << 30,
+
+    JYTypeEncodingJYModel,
     JYTypeEncodingNSUnknown
 };

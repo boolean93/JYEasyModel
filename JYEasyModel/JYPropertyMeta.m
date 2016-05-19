@@ -7,44 +7,13 @@
 //
 
 #import "JYPropertyMeta.h"
-
-@implementation JYPropertyMeta
+#import "NSObject+JYEasyModel.h"
 
 // 首字母大写并加入 set 前缀和 : 后缀
 NS_INLINE NSString *getSetterName(const char *name) {
     return [NSString stringWithFormat:@"set%c%s:", _toupper(name[0]), ++name];
 }
-
-+ (instancetype)metaWithProperty:(objc_property_t)property {
-    JYPropertyMeta *instance = self.new;
-    instance->_property = property;
-    const char *propertyName = property_getName(property);
-    instance->_propertyName = [NSString stringWithUTF8String:propertyName];
-    instance->_setterName = getSetterName(propertyName);
-    instance->_setterSeletor = NSSelectorFromString(instance->_setterName);
-    instance->_type = [self getPropertyType:property instance:instance];
-    return instance;
-}
-
-+ (JYTypeEncoding)getPropertyType:(objc_property_t)property instance:(JYPropertyMeta *)instance {
-    char *typeString = property_copyAttributeValue(property, "T");
-    unsigned long len = strlen(typeString);
-    if (len > 0) {
-        if (typeString[0] == '@') {
-            char className[len - 2];
-            strcpy(className, typeString + 2);
-            className[len - 3] = '\0';
-            Class cls = objc_getClass(className);
-            instance->_typeName = [NSString stringWithUTF8String:className];
-            return [self getTypeEncodingForClass:cls];
-        } else {
-            return [self getTypeEncodingForAttr:typeString[0]];
-        }
-    }
-    return JYTypeEncodingUnknown;
-}
-
-+ (JYTypeEncoding)getTypeEncodingForClass:(Class)cls {
+NS_INLINE JYTypeEncoding getTypeEncodingForClass(Class cls) {
     if (cls == nil) {   // 剪枝
         return JYTypeEncodingNSUnknown;
     }
@@ -70,7 +39,7 @@ NS_INLINE NSString *getSetterName(const char *name) {
     return JYTypeEncodingNSUnknown;
 }
 
-+ (JYTypeEncoding)getTypeEncodingForAttr:(char)attr {
+NS_INLINE JYTypeEncoding getTypeEncodingForAttr(char attr) {
     switch (attr) {
         case 'c':   return JYTypeEncodingChar;
         case 'i':   return JYTypeEncodingInt;
@@ -92,6 +61,40 @@ NS_INLINE NSString *getSetterName(const char *name) {
     }
 }
 
+@implementation JYPropertyMeta
+
++ (instancetype)metaWithProperty:(objc_property_t)property {
+    JYPropertyMeta *instance = self.new;
+    instance->_property = property;
+    const char *propertyName = property_getName(property);
+    instance->_propertyName = [NSString stringWithUTF8String:propertyName];
+    instance->_setterName = getSetterName(propertyName);
+    instance->_setterSeletor = NSSelectorFromString(instance->_setterName);
+    instance->_type = [self getPropertyType:property instance:instance];
+    return instance;
+}
+
++ (JYTypeEncoding)getPropertyType:(objc_property_t)property instance:(JYPropertyMeta *)instance {
+    char *typeString = property_copyAttributeValue(property, "T");
+    unsigned long len = strlen(typeString);
+    if (len > 0) {
+        if (typeString[0] == '@') {
+            char className[len - 2];
+            strcpy(className, typeString + 2);
+            className[len - 3] = '\0';
+            Class cls = objc_getClass(className);
+            instance->_typeName = [NSString stringWithUTF8String:className];
+            return getTypeEncodingForClass(cls);
+        } else {
+            return getTypeEncodingForAttr(typeString[0]);
+        }
+    }
+    if ([instance isKindOfJYModel]) {
+        return JYTypeEncodingJYModel;
+    }
+    return JYTypeEncodingUnknown;
+}
+
 // TODO: 不同类型的对象之间的判断
 + (BOOL)canMatchFrom:(JYTypeEncoding)fromType to:(JYTypeEncoding)toType {
     if (fromType == toType) {
@@ -110,7 +113,7 @@ NS_INLINE NSString *getSetterName(const char *name) {
 
 - (BOOL)isKindOfJYModel {
     Class cls = NSClassFromString(self.typeName);
-    if ( [cls instancesRespondToSelector:@selector(iamjymodel)]) {
+    if ([cls instancesRespondToSelector:@selector(iamjymodel)]) {
         return YES;
     }
     return NO;

@@ -13,3 +13,4 @@
 + (instancetype)JY_modelWithDictionary:(NSDictionary *)dict;
 
 @end
+

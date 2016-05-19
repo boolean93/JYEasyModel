@@ -7,13 +7,40 @@
 //
 
 #import "NSDictionary+JYEasyModel.h"
+#import "NSObject+JYEasyModel.h"
 #import "JYPropertyMeta.h"
+
+NS_INLINE JYTypeEncoding getTypeEncodingForClass(Class cls) {
+    if (cls == nil) {   // 剪枝
+        return JYTypeEncodingNSUnknown;
+    }
+
+    if ([cls isSubclassOfClass:NSMutableArray.class]) return JYTypeEncodingNSMutableArray;
+    if ([cls isSubclassOfClass:NSMutableString.class]) return JYTypeEncodingNSMutableString;
+    if ([cls isSubclassOfClass:NSMutableDictionary.class]) return JYTypeEncodingNSMutableDict;
+    if ([cls isSubclassOfClass:NSMutableSet.class]) return JYTypeEncodingNSMutableSet;
+    if ([cls isSubclassOfClass:NSMutableData.class]) return JYTypeEncodingNSMutableData;
+
+    if ([cls isSubclassOfClass:NSArray.class]) return JYTypeEncodingNSArray;
+    if ([cls isSubclassOfClass:NSString.class]) return JYTypeEncodingNSString;
+    if ([cls isSubclassOfClass:NSDictionary.class]) return JYTypeEncodingNSDict;
+    if ([cls isSubclassOfClass:NSSet.class]) return JYTypeEncodingNSSet;
+    if ([cls isSubclassOfClass:NSData.class]) return JYTypeEncodingNSData;
+
+    if ([cls isSubclassOfClass:NSDate.class]) return JYTypeEncodingNSDate;
+    if ([cls isSubclassOfClass:NSDecimalNumber.class]) return JYTypeEncodingNSDecimalNumber;
+    if ([cls isSubclassOfClass:NSNumber.class]) return JYTypeEncodingNSNumber;
+    if ([cls isSubclassOfClass:NSURL.class]) return JYTypeEncodingNSURL;
+    if ([cls isSubclassOfClass:NSValue.class]) return JYTypeEncodingNSValue;
+
+    return JYTypeEncodingNSUnknown;
+}
 
 @implementation NSDictionary (JYEasyModel)
 
 - (nullable id)matchedValueForProperty:(JYPropertyMeta * _Nonnull)property {
     id matchedValue = [self valueForKey:property.propertyName];
-    JYTypeEncoding valueType = [JYPropertyMeta getTypeEncodingForClass:object_getClass(matchedValue)];
+    JYTypeEncoding valueType = getTypeEncodingForClass(object_getClass(matchedValue));
     JYTypeEncoding propertyType = property.type;
     if ([JYPropertyMeta canMatchFrom:valueType to:propertyType]) {
         return matchedValue;

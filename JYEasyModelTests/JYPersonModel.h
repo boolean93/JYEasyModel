@@ -6,6 +6,7 @@
 //  Copyright © 2016年 Boolean93. All rights reserved.
 //
 #import <JYEasyModel/JYEasyModel.h>
+@class JYDickModel;
 
 @interface JYPersonModel : NSObject
 @property (nonatomic, strong) NSNumber *age;
