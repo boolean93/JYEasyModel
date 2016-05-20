@@ -31,7 +31,6 @@
             temp.properties = propertyList.copy;
             temp;
         });
-        result.className = [NSString stringWithUTF8String:class_getName(cls)];
         [JYGlobalInfo sharedClasses][(id)cls] = result;
         free(properties);
     }

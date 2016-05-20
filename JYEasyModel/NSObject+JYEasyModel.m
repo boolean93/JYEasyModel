@@ -13,7 +13,7 @@
 #import <objc/runtime.h>
 #import <objc/message.h>
 
-#define JY_OBJC_MSGSEND(x,y,z) ((void (*)(id, SEL, id))(void *) objc_msgSend)(x,y,z);
+#define JY_OBJC_MSGSEND(a,x,y,z) ((void (*)(id, SEL, id))(void *) a)(x,y,z);
 
 @implementation NSObject (JYEasyModel)
 
@@ -28,7 +28,7 @@
                 // 递归, 对自定义成员变量的类型进行处理
                 valueToSet = [NSClassFromString(property.typeName) JY_modelWithDictionary:valueToSet];
             }
-            ((void (*)(id, SEL, id))(void *) property.setterIMP)(instance, property.setterSeletor, valueToSet);
+            JY_OBJC_MSGSEND(property.setterIMP, instance, property.setterSeletor, valueToSet);
         }
     }
     return instance;
