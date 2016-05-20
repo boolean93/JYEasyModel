@@ -68,7 +68,6 @@ NS_INLINE JYTypeEncoding getTypeEncodingForAttr(char attr) {
     instance->_property = property;
     const char *propertyName = property_getName(property);
     instance->_propertyName = [NSString stringWithUTF8String:propertyName];
-    instance->_cls = NSClassFromString([NSString stringWithCString:propertyName encoding:NSUTF8StringEncoding]);
     instance->_setterName = getSetterName(propertyName);
     instance->_setterSeletor = NSSelectorFromString(instance->_setterName);
     instance->_type = [self getPropertyType:property instance:instance];
@@ -85,7 +84,9 @@ NS_INLINE JYTypeEncoding getTypeEncodingForAttr(char attr) {
             strcpy(className, typeString + 2);
             className[len - 3] = '\0';
             Class cls = objc_getClass(className);
+            // TODO: 这里不太好.
             instance->_typeName = [NSString stringWithUTF8String:className];
+            instance->_cls = NSClassFromString(instance->_typeName);
             return getTypeEncodingForClass(cls);
         } else {
             return getTypeEncodingForAttr(typeString[0]);

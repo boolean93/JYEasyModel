@@ -40,7 +40,8 @@ NS_INLINE JYTypeEncoding getTypeEncodingForClass(Class cls) {
 
 - (nullable id)matchedValueForProperty:(JYPropertyMeta * _Nonnull)property {
     // TODO: 自定义字段映射
-    id matchedValue = [self valueForKey:property.propertyName];
+    NSString *propertyName = property.propertyName;
+    id matchedValue = CFDictionaryGetValue((__bridge CFDictionaryRef)self, (__bridge const void *)(propertyName));
 
     // 类型相同直接通过
     if ([matchedValue isKindOfClass:property.cls]) {
