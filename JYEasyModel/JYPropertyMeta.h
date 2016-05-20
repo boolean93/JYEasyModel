@@ -13,6 +13,7 @@
 @interface JYPropertyMeta : NSObject
 
 @property (nonatomic) objc_property_t property;
+@property (nonatomic, strong) Class cls;
 @property (nonatomic, strong) NSString *propertyName;
 @property (nonatomic, strong) NSString *setterName;
 @property (nonatomic) SEL setterSeletor;

@@ -39,9 +39,17 @@ NS_INLINE JYTypeEncoding getTypeEncodingForClass(Class cls) {
 @implementation NSDictionary (JYEasyModel)
 
 - (nullable id)matchedValueForProperty:(JYPropertyMeta * _Nonnull)property {
+    // TODO: 自定义字段映射
     id matchedValue = [self valueForKey:property.propertyName];
-    JYTypeEncoding valueType = getTypeEncodingForClass(object_getClass(matchedValue));
+
+    // 类型相同直接通过
+    if ([matchedValue isKindOfClass:property.cls]) {
+        return matchedValue;
+    }
+
+    // 继续检查类型问题
     JYTypeEncoding propertyType = property.type;
+    JYTypeEncoding valueType = getTypeEncodingForClass(object_getClass(matchedValue));
     if ([JYPropertyMeta canMatchFrom:valueType to:propertyType]) {
         return matchedValue;
     }

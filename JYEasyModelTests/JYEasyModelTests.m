@@ -14,6 +14,7 @@
 
 @interface JYEasyModelTests : XCTestCase
 @property (nonatomic, strong) NSDictionary *dict;
+@property (nonatomic, strong) NSMutableDictionary *bigDict;
 @property (nonatomic, strong) NSMutableArray *array;
 @end
 
@@ -22,10 +23,11 @@
 - (void)setUp {
     [super setUp];
     self.dict = @{@"age" : @10, @"array" : @[@"fuck", @2, @3], @"str" : @"hehe"};
-//    self.array = @[].mutableCopy;
-//    for (int i = 0; i < 10000000; i++) {
-//        [self.array addObject:[NSNumber numberWithInt:i]];
+//    NSMutableDictionary *bigDict = @{}.mutableCopy;
+//    for (int i = 0; i < 1000000; i++) {
+//        bigDict[@(i)] = @(i);
 //    }
+//    self.bigDict = bigDict.copy;
     // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 
@@ -57,25 +59,27 @@
 
 - (void)testForLooper {
     [self measureBlock:^{
-        for (NSNumber *number in self.array) {
-
+        NSArray *keys = self.bigDict.allKeys;
+        for (id key in keys) {
+            id element = self.bigDict[key];
         }
     }];
 }
 
-- (void)testCFArrayLooper {
+static void apply(const void *key, const void *value, void *context) {
+    NSString *keyString = [NSString stringWithUTF8String:key];
+}
+
+- (void)testCFDictionaryLooper {
     [self measureBlock:^{
-        CFArrayRef cfArr = (__bridge CFArrayRef)self.array.copy;
-        for (int i = 0; i < 10000000; i++) {
-            CFArrayGetValueAtIndex(cfArr, i);
-        }
-//        CFArrayApplyFunction(cfArr, CFRangeMake(0, 10000000), CFArrayApplierFunction applier, nil);
+        CFDictionaryRef cfDic = (__bridge CFDictionaryRef)self.bigDict;
+        CFDictionaryApplyFunction(cfDic, apply, nil);
     }];
 }
 
 - (void)testEnumerate {
     [self measureBlock:^{
-        [self.array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [self.bigDict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
 
         }];
     }];
