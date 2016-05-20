@@ -22,6 +22,7 @@
         NSMutableArray *propertyList = @[].mutableCopy;
         for (int i = 0; i < count; i++) {
             JYPropertyMeta *oneProperty = [JYPropertyMeta metaWithProperty:properties[i]];
+            oneProperty.setterIMP = class_getMethodImplementation(cls, oneProperty.setterSeletor);
             [propertyList addObject:oneProperty];
         }
 

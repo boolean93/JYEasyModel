@@ -28,7 +28,7 @@
                 // 递归, 对自定义成员变量的类型进行处理
                 valueToSet = [NSClassFromString(property.typeName) JY_modelWithDictionary:valueToSet];
             }
-            JY_OBJC_MSGSEND(instance, property.setterSeletor, valueToSet);
+            ((void (*)(id, SEL, id))(void *) property.setterIMP)(instance, property.setterSeletor, valueToSet);
         }
     }
     return instance;

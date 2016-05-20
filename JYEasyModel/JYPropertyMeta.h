@@ -18,6 +18,7 @@
 @property (nonatomic) SEL setterSeletor;
 @property (nonatomic) JYTypeEncoding type;
 @property (nonatomic) NSString *typeName;
+@property (nonatomic) IMP setterIMP;
 
 + (instancetype)metaWithProperty:(objc_property_t)property;
 
